@@ -5,7 +5,7 @@ description = ""
 authors = [{ name = "Eric Dasse", email = "christ.gououi@gmail.com" }]
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = []
+dependencies = ["pandas (>=2.3.3,<3.0.0)"]
 
 
 [build-system]
