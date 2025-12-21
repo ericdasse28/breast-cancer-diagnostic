@@ -2,13 +2,10 @@
 name = "breast-cancer-diagnostic"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "Eric Dasse",email = "christ.gououi@gmail.com"}
-]
+authors = [{ name = "Eric Dasse", email = "christ.gououi@gmail.com" }]
 readme = "README.md"
-requires-python = ">=3.13"
-dependencies = [
-]
+requires-python = ">=3.10"
+dependencies = []
 
 
 [build-system]
