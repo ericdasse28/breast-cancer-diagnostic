@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 import pandas as pd
+from sklearn.model_selection import train_test_split
 from ucimlrepo import fetch_ucirepo
 
 
@@ -16,3 +17,14 @@ def load_dataset() -> Dataset:
     y = aspirates.data.targets
 
     return Dataset(X, y)
+
+
+def split_dataset(dataset: Dataset) -> tuple[Dataset, Dataset]:
+    """Splits dataset into training
+    and test sets."""
+
+    X_train, X_test, y_train, y_test = train_test_split(
+        dataset.features, dataset.targets
+    )
+
+    return Dataset(X_train, y_train), Dataset(X_test, y_test)
