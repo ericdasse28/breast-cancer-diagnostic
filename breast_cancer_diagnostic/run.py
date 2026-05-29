@@ -5,7 +5,7 @@ from breast_cancer_diagnostic.data_preprocessing import preprocess_data
 from breast_cancer_diagnostic.train import train
 
 
-def run_training():
+def main():
     aspirates = fetch_ucirepo(id=17)
     X, y = aspirates.data.features, aspirates.data.targets
     X_cleaned = preprocess_data(X)
@@ -19,4 +19,4 @@ def run_training():
 
 
 if __name__ == "__main__":
-    run_training()
+    main()
