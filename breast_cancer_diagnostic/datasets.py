@@ -23,7 +23,11 @@ def split_dataset(dataset: Dataset) -> tuple[Dataset, Dataset]:
     and test sets."""
 
     X_train, X_test, y_train, y_test = train_test_split(
-        dataset.features, dataset.targets, test_size=0.2, random_state=123
+        dataset.features,
+        dataset.targets,
+        test_size=0.2,
+        random_state=123,
+        stratify=dataset.targets,
     )
 
     return Dataset(X_train, y_train), Dataset(X_test, y_test)
