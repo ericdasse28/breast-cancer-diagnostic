@@ -14,8 +14,7 @@ class Dataset:
 def load_dataset() -> Dataset:
     aspirates = fetch_ucirepo(id=17)
     X = aspirates.data.features
-    y = aspirates.data.targets
-
+    y = aspirates.data.targets["Diagnosis"]
     return Dataset(X, y)
 
 
