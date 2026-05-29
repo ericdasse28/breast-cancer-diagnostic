@@ -1,21 +1,25 @@
-from sklearn.metrics import accuracy_score, precision_score, recall_score
-from ucimlrepo import fetch_ucirepo
-
 from breast_cancer_diagnostic.data_preprocessing import preprocess_data
+from breast_cancer_diagnostic.datasets import load_dataset, split_dataset
+from breast_cancer_diagnostic.evaluate import evaluate
+from breast_cancer_diagnostic.models import create_logistic_regression
 from breast_cancer_diagnostic.train import train
 
 
 def main():
-    aspirates = fetch_ucirepo(id=17)
-    X, y = aspirates.data.features, aspirates.data.targets
-    X_cleaned = preprocess_data(X)
+    breast_cancer_dataset = load_dataset()
+    train_dataset, test_dataset = split_dataset(breast_cancer_dataset)
 
-    model = train(X_cleaned.values, y.values.ravel())
-    y_pred = model.predict(X_cleaned.values)
+    X_train = preprocess_data(train_dataset.features)
+    X_test = preprocess_data(test_dataset.features)
 
-    print(f"===> Accuracy: {accuracy_score(y, y_pred)}")
-    print(f"===> Precision: {precision_score(y, y_pred, pos_label='M')}")
-    print(f"===> Recall: {recall_score(y, y_pred, pos_label='M')}")
+    model = create_logistic_regression()
+    model = train(model, X_train, train_dataset.targets)
+
+    metrics = evaluate(model, X_test, test_dataset.targets)
+
+    print(f"===> Accuracy: {metrics['accuracy']}")
+    print(f"===> Precision: {metrics['precision']}")
+    print(f"===> Recall: {metrics['recall']}")
 
 
 if __name__ == "__main__":
